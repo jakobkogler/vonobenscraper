@@ -23,4 +23,5 @@ class VonObenSpider(scrapy.Spider):
         next_button = response.css('button.slide-btn--next')
         if next_button:
             next_url = next_button.css('::attr("data-next")').get()
-            yield response.follow(next_url, self.parse)
+            if next_url != '/spezial/vonoben/':  # this is the url on the last page
+                yield response.follow(next_url, self.parse)
